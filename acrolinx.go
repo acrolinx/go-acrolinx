@@ -25,6 +25,9 @@ type Client struct {
 	accessToken string
 
 	client *http.Client
+
+	// Services for different parts of the API
+	Checking *CheckingService
 }
 
 func NewClient(signature string, urlStr string) (*Client, error) {
@@ -42,6 +45,9 @@ func NewClient(signature string, urlStr string) (*Client, error) {
 			Timeout: 30 * time.Second,
 		},
 	}
+
+	client.Checking = &CheckingService{client}
+
 	return client, nil
 }
 
