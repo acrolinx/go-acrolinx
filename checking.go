@@ -69,3 +69,42 @@ func (s *CheckingService) ListCapabilities(opts *ListCapabilitiesOptions) (*Capa
 
 	return &caps, links, nil
 }
+
+type SubmitCheckOptions struct {
+	Content      string        `json:"content"`
+	CheckOptions *CheckOptions `json:"checkOptions"`
+	Document     *Document     `json:"document"`
+	Language     string        `json:"language"`
+}
+
+type CheckOptions struct {
+	GuidanceProfileID  string               `json:"guidanceProfileId"`
+	ContentFormat      string               `json:"contentFormat"`
+	ReportTypes        []string             `json:"reportTypes"`
+	CheckType          string               `json:"checkType"`
+	PartialCheckRanges []*PartialCheckRange `json:"partialCheckRanges"`
+	BatchID            string               `json:"batchId"`
+}
+
+type Document struct {
+	Reference    string         `json:"reference"`
+	CustomFields []*CustomField `json:"customFields"`
+}
+
+type PartialCheckRange struct {
+	Begin int `json:"begin"`
+	End   int `json:"end"`
+}
+
+type CustomField struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+type SubmitCheckResponse struct {
+	ID string `json:"id"`
+}
+
+func (s *CheckingService) SubmitCheck(opts *SubmitCheckOptions) (*SubmitCheckResponse, Links, error) {
+	return nil, nil, nil
+}
