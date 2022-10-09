@@ -41,3 +41,31 @@ type ContentFormat struct {
 	Id          string `json:"id"`
 	DisplayName string `json:"displayName"`
 }
+
+type ListCapabilitiesOptions struct {
+	Locale string
+}
+
+func (s *CheckingService) ListCapabilities(opts *ListCapabilitiesOptions) (*Capabilities, Links, error) {
+	req, err := s.client.newRequest("api/v1/checking/capabilities", nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if opts != nil && opts.Locale != "" {
+		req.Header.Set(headerLocale, opts.Locale)
+	}
+
+	var caps Capabilities
+	links := make(Links)
+	resp := Response{
+		Data:  caps,
+		Links: links,
+	}
+	err = s.client.do(req, &resp)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return &caps, links, nil
+}

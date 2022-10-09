@@ -13,6 +13,7 @@ const (
 	userAgent       = "go-acrolinx"
 	headerSignature = "X-Acrolinx-Client"
 	headerToken     = "X-Acrolinx-Auth"
+	headerLocale    = "X-Acrolinx-Client-Locale"
 )
 
 type Client struct {
@@ -109,6 +110,21 @@ func makePlatformURL(urlStr string) (*url.URL, error) {
 	}
 
 	return platformURL, nil
+}
+
+type Links = map[string]string
+
+type Response struct {
+	Data  interface{} `json:"data,omitempty"`
+	Links Links       `json:"links,omitempty"`
+	Error Error       `json:"error,omitempty"`
+}
+
+type Error struct {
+	Type   string `json:"type"`
+	Title  string `json:"title"`
+	Detail string `json:"detail"`
+	Status int    `json:"status"`
 }
 
 type Credentials struct {
