@@ -15,7 +15,7 @@ type Capabilities struct {
 }
 
 type GuidanceProfile struct {
-	Id          string     `json:"id"`
+	ID          string     `json:"id"`
 	DisplayName string     `json:"displayName"`
 	Language    *Language  `json:"language"`
 	Goals       []*Goal    `json:"goals"`
@@ -23,12 +23,12 @@ type GuidanceProfile struct {
 }
 
 type Language struct {
-	Id          string `json:"id"`
+	ID          string `json:"id"`
 	DisplayName string `json:"displayName"`
 }
 
 type Goal struct {
-	Id          string `json:"id"`
+	ID          string `json:"id"`
 	DisplayName string `json:"displayName"`
 	Color       string `json:"color"`
 	Scoring     string `json:"scoring"`
@@ -39,7 +39,7 @@ type TermSet struct {
 }
 
 type ContentFormat struct {
-	Id          string `json:"id"`
+	ID          string `json:"id"`
 	DisplayName string `json:"displayName"`
 }
 
