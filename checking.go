@@ -60,14 +60,20 @@ func (s *CheckingService) GetCapabilities(opts *GetCapabilitiesOptions) (*Capabi
 	}
 
 	var caps Capabilities
+	var reqError RequestError
 	links := make(Links)
 	resp := Response{
 		Data:  &caps,
 		Links: links,
+		Error: &reqError,
 	}
 	err = s.client.do(req, &resp)
 	if err != nil {
 		return nil, nil, err
+	}
+
+	if reqError != (RequestError{}) {
+		return nil, links, &reqError
 	}
 
 	return &caps, links, nil

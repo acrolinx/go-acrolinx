@@ -122,16 +122,20 @@ func makePlatformURL(urlStr string) (*url.URL, error) {
 type Links = map[string]string
 
 type Response struct {
-	Data  interface{} `json:"data,omitempty"`
-	Links Links       `json:"links,omitempty"`
-	Error Error       `json:"error,omitempty"`
+	Data  interface{}   `json:"data,omitempty"`
+	Links Links         `json:"links,omitempty"`
+	Error *RequestError `json:"error,omitempty"`
 }
 
-type Error struct {
+type RequestError struct {
 	Type   string `json:"type"`
 	Title  string `json:"title"`
 	Detail string `json:"detail"`
 	Status int    `json:"status"`
+}
+
+func (r *RequestError) Error() string {
+	return r.Detail
 }
 
 type Credentials struct {
