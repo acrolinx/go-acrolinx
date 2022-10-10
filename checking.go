@@ -5,12 +5,13 @@ type CheckingService struct {
 }
 
 type Capabilities struct {
-	GuidanceProfiles []*GuidanceProfile `json:"guidanceProfiles"`
-	ContentFormats   []*ContentFormat   `json:"contentFormats"`
-	ContentEncodings []string           `json:"contentEncodings"`
-	ReferencePattern string             `json:"referencePattern"`
-	CheckTypes       []string           `json:"checkTypes"`
-	ReportTypes      []string           `json:"reportTypes"`
+	DefaultGuidanceProfileID string             `json:"defaultGuidanceProfileID"`
+	GuidanceProfiles         []*GuidanceProfile `json:"guidanceProfiles"`
+	ContentFormats           []*ContentFormat   `json:"contentFormats"`
+	ContentEncodings         []string           `json:"contentEncodings"`
+	ReferencePattern         string             `json:"referencePattern"`
+	CheckTypes               []string           `json:"checkTypes"`
+	ReportTypes              []string           `json:"reportTypes"`
 }
 
 type GuidanceProfile struct {
