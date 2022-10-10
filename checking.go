@@ -138,3 +138,86 @@ func (s *CheckingService) SubmitCheck(opts *SubmitCheckOptions) (*Check, Links, 
 
 	return &check, links, nil
 }
+
+type CheckResult struct {
+	Progress
+	Result
+}
+
+type Result struct {
+	ID      string   `json:"id"`
+	Quality *Quality `json:"quality"`
+	Counts  *Counts  `json:"counts"`
+	Goals   []*Goal  `json:"goals"`
+	Issues  []*Issue `json:"issue"`
+}
+
+type Quality struct {
+	Score            int
+	Status           string
+	ScoresByStrategy []*Score
+	ScoresByGoal     []*Score
+	Metrics          []*Score
+}
+
+type Score struct {
+	ID    string `json:"id"`
+	Score int    `json:"score"`
+}
+
+type Counts struct {
+	Sentences    int `json:"sentences"`
+	Words        int `json:"words"`
+	Issues       int `json:"issues"`
+	ScoredIssues int `json:"scoredIssues"`
+}
+
+type Issue struct {
+	GoalID                string                 `json:"goalId"`
+	InternalName          string                 `json:"internalName"`
+	DisplayNameHTML       string                 `json:"displayNameHtml"`
+	GuidanceHTML          string                 `json:"guidanceHtml"`
+	DisplaySurface        string                 `json:"displaySurface"`
+	IssueType             string                 `json:"issueType"`
+	Scoring               string                 `json:"scoring"`
+	PositionalInformation *PositionalInformation `json:"positionalInformation"`
+	ReadOnly              bool                   `json:"readOnly"`
+	IssueLocations        []*IssueLocation       `json:"issueLocations"`
+	Suggestions           []*Suggestion          `json:"suggestions"`
+	SubIssues             []*SubIssue            `json:"subIssues"`
+	Debug                 *Debug                 `json:"debug"`
+	CanAddToDictionary    bool                   `json:"canAddToDictionary"`
+	Links                 Links                  `json:"links"`
+}
+
+type PositionalInformation struct {
+	Hashes  *Hashes  `json:"hashes"`
+	Matches []*Match `json:"matches"`
+}
+
+type Hashes struct {
+	Issue       string `json:"issue"`
+	Environment string `json:"environment"`
+	Index       string `json:"index"`
+}
+
+type Match struct {
+	ExtractedPart  string `json:"extractedPart"`
+	ExtractedBegin int    `json:"extractedBegin"`
+	ExtractedEnd   int    `json:"extractedEnd"`
+	OriginalPart   string `json:"originalPart"`
+	OriginalBegin  int    `json:"originalBegin"`
+	OriginalEnd    int    `json:"originalEnd"`
+}
+
+type IssueLocation struct{}
+
+type Suggestion struct{}
+
+type SubIssue struct{}
+
+type Debug struct{}
+
+func (s *CheckingService) GetCheckResult(check *Check) (*CheckResult, Links, error) {
+	return nil, nil, nil
+}
