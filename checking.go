@@ -62,7 +62,7 @@ func (s *CheckingService) ListCapabilities(opts *ListCapabilitiesOptions) (*Capa
 	var caps Capabilities
 	links := make(Links)
 	resp := Response{
-		Data:  caps,
+		Data:  &caps,
 		Links: links,
 	}
 	err = s.client.do(req, &resp)

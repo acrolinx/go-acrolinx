@@ -1,0 +1,23 @@
+{"links":{"submitCheck":"https://example.com/api/v1/checking/checks","checkingCapabilities":"https://example.com/api/v1/checking/capabilities"},"data":{"guidanceProfiles":[{
+                "id": "710e1361-90b7-3867-a42e-35279b7f8aa2",
+                "displayName": "de - Blog Posts",
+                "language": {
+                    "id": "de",
+                    "displayName": "German"
+                },
+                "goals": [
+                    {
+                        "id": "CLARITY",
+                        "displayName": "Verständlichkeit",
+                        "color": "#ec407a",
+                        "scoring": "required"
+                    },
+                    {
+                        "id": "CONSISTENCY",
+                        "displayName": "Einheitlichkeit",
+                        "color": "#ffd600",
+                        "scoring": "required"
+                    }
+                ],
+                "termSets": []
+            }],"contentFormats":[{"id":"TEXT","displayName":"Plain Text"},{"id":"XML","displayName":"XML"},{"id":"MS_OFFICE","displayName":"Microsoft Office Container"}],"contentEncodings":["none","base64"],"referencePattern":"\\.(xml|XML|xhtm|XHTM|xhtml|XHTML)$|\\.(svg|SVG|resx|RESX)$","checkTypes":["interactive","batch","baseline","automated"],"reportTypes":["scorecard","contentAnalysisDashboard"],"defaultGuidanceProfileId":null}}

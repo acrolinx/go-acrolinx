@@ -1,0 +1,1 @@
+{"links":{},"error":{"detail":"Please provide a valid signature in the X-Acrolinx-Client header.","type":"clientSignatureMissing","title":"Client signature missing.","status":400}}
