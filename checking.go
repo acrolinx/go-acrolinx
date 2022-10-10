@@ -45,11 +45,11 @@ type ContentFormat struct {
 	DisplayName string `json:"displayName"`
 }
 
-type ListCapabilitiesOptions struct {
+type GetCapabilitiesOptions struct {
 	Locale string
 }
 
-func (s *CheckingService) ListCapabilities(opts *ListCapabilitiesOptions) (*Capabilities, Links, error) {
+func (s *CheckingService) GetCapabilities(opts *GetCapabilitiesOptions) (*Capabilities, Links, error) {
 	req, err := s.client.newRequest(http.MethodGet, "api/v1/checking/capabilities", nil)
 	if err != nil {
 		return nil, nil, err

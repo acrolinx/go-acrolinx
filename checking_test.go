@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListCapabilities(t *testing.T) {
+func TestGetCapabilities(t *testing.T) {
 	mux, server, client := setup(t)
 	defer teardown(server)
 
@@ -16,8 +16,8 @@ func TestListCapabilities(t *testing.T) {
 		mustWriteHTTPResponse(t, w, "get_capabilities.json")
 	})
 
-	opts := &ListCapabilitiesOptions{}
-	caps, links, err := client.Checking.ListCapabilities(opts)
+	opts := &GetCapabilitiesOptions{}
+	caps, links, err := client.Checking.GetCapabilities(opts)
 	if err != nil {
 		t.Fatalf("Checking.ListCapabilities returned error: %v", err)
 	}
