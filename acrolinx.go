@@ -3,6 +3,7 @@ package acrolinx
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -33,7 +34,7 @@ type Client struct {
 func NewClient(signature string, urlStr string) (*Client, error) {
 	platformURL, err := makePlatformURL(urlStr)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Error creating new client: %w", err)
 	}
 
 	// build HTTP NewClient
@@ -57,13 +58,13 @@ func (c *Client) SignIn(username string, password string) error {
 
 	req, err := c.newRequest(http.MethodPost, path, creds)
 	if err != nil {
-		return err
+		return fmt.Errorf("Error signing in, could not prepare request: %w", err)
 	}
 
 	var token accessToken
 	err = c.do(req, token)
 	if err != nil {
-		return err
+		return fmt.Errorf("Error signing in, could not prepare request: %w", err)
 	}
 	c.accessToken = token.AccessToken
 
@@ -76,13 +77,13 @@ func (c *Client) newRequest(method, path string, creds interface{}) (*http.Reque
 
 	jsonBody, err := json.Marshal(creds)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Error encoding JSON: %w", err)
 	}
 	body := bytes.NewReader(jsonBody)
 
 	req, err := http.NewRequest(method, u.String(), body)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Error creating new request: %w", err)
 	}
 	req.Header.Set(headerSignature, c.signature)
 	if c.accessToken != "" {
@@ -95,12 +96,12 @@ func (c *Client) newRequest(method, path string, creds interface{}) (*http.Reque
 func (c *Client) do(req *http.Request, v interface{}) error {
 	res, err := c.client.Do(req)
 	if err != nil {
-		return err
+		return fmt.Errorf("Error submitting request: %w", err)
 	}
 
 	err = json.NewDecoder(res.Body).Decode(&v)
 	if err != nil {
-		return err
+		return fmt.Errorf("Error decoding JSON response: %w", err)
 	}
 	return nil
 }
@@ -112,7 +113,7 @@ func makePlatformURL(urlStr string) (*url.URL, error) {
 
 	platformURL, err := url.Parse(urlStr)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Error parsing platform URL: %w", err)
 	}
 
 	return platformURL, nil
