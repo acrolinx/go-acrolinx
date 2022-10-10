@@ -54,3 +54,16 @@ func TestGetCapabilities(t *testing.T) {
 	assert.Equal(t, expectedCaps, caps)
 	assert.Equal(t, expectedLinks, links)
 }
+
+func TestGetCapabilitiesWithError(t *testing.T) {
+	mux, server, client := setup(t)
+	defer teardown(server)
+
+	mux.HandleFunc("/api/v1/checking/capabilities", func(w http.ResponseWriter, r *http.Request) {
+		mustWriteHTTPResponse(t, w, "error.json")
+	})
+
+	_, _, err := client.Checking.GetCapabilities(&GetCapabilitiesOptions{})
+
+	assert.EqualError(t, err, "Please provide a valid signature in the X-Acrolinx-Client header.")
+}
