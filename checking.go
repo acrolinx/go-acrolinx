@@ -1,5 +1,7 @@
 package acrolinx
 
+import "net/http"
+
 type CheckingService struct {
 	client *Client
 }
@@ -48,7 +50,7 @@ type ListCapabilitiesOptions struct {
 }
 
 func (s *CheckingService) ListCapabilities(opts *ListCapabilitiesOptions) (*Capabilities, Links, error) {
-	req, err := s.client.newRequest("api/v1/checking/capabilities", nil)
+	req, err := s.client.newRequest(http.MethodGet, "api/v1/checking/capabilities", nil)
 	if err != nil {
 		return nil, nil, err
 	}

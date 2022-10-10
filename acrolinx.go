@@ -55,7 +55,7 @@ func (c *Client) SignIn(username string, password string) error {
 	creds := Credentials{username, password}
 	path := "dashboard/api/signin/authenticate"
 
-	req, err := c.newRequest(path, creds)
+	req, err := c.newRequest(http.MethodPost, path, creds)
 	if err != nil {
 		return err
 	}
@@ -70,7 +70,7 @@ func (c *Client) SignIn(username string, password string) error {
 	return nil
 }
 
-func (c *Client) newRequest(path string, creds interface{}) (*http.Request, error) {
+func (c *Client) newRequest(method, path string, creds interface{}) (*http.Request, error) {
 	u := *c.platformURL
 	u.Path = c.platformURL.Path + path
 
@@ -80,7 +80,7 @@ func (c *Client) newRequest(path string, creds interface{}) (*http.Request, erro
 	}
 	body := bytes.NewReader(jsonBody)
 
-	req, err := http.NewRequest(http.MethodPost, u.String(), body)
+	req, err := http.NewRequest(method, u.String(), body)
 	if err != nil {
 		return nil, err
 	}
