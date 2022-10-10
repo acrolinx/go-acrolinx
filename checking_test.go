@@ -17,12 +17,12 @@ func TestListCapabilities(t *testing.T) {
 	})
 
 	opts := &ListCapabilitiesOptions{}
-	caps, _, err := client.Checking.ListCapabilities(opts)
+	caps, links, err := client.Checking.ListCapabilities(opts)
 	if err != nil {
 		t.Fatalf("Checking.ListCapabilities returned error: %v", err)
 	}
 
-	expected := &Capabilities{
+	expectedCaps := &Capabilities{
 		GuidanceProfiles: []*GuidanceProfile{
 			{
 				ID:          "710e1361-90b7-3867-a42e-35279b7f8aa2",
@@ -46,5 +46,11 @@ func TestListCapabilities(t *testing.T) {
 		ReportTypes:      []string{"scorecard", "contentAnalysisDashboard"},
 	}
 
-	assert.Equal(t, expected, caps)
+	expectedLinks := map[string]string{
+		"submitCheck":          "https://example.com/api/v1/checking/checks",
+		"checkingCapabilities": "https://example.com/api/v1/checking/capabilities",
+	}
+
+	assert.Equal(t, expectedCaps, caps)
+	assert.Equal(t, expectedLinks, links)
 }
