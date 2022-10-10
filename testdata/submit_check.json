@@ -1,0 +1,9 @@
+{
+    "links": {
+        "cancel": "https://example.com/api/v1/checking/checks/052929ee-be0c-46a7-87ce-eebd308fef6e",
+        "result": "https://example.com/api/v1/checking/checks/052929ee-be0c-46a7-87ce-eebd308fef6e"
+    },
+    "data": {
+        "id": "052929ee-be0c-46a7-87ce-eebd308fef6e"
+    }
+}

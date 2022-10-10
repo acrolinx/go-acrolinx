@@ -1,6 +1,9 @@
 package acrolinx
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 type CheckingService struct {
 	client *Client
@@ -115,4 +118,23 @@ type Check struct {
 }
 
 func (s *CheckingService) SubmitCheck(opts *SubmitCheckOptions) (*Check, Links, error) {
+	req, err := s.client.newRequest(http.MethodPost, "api/v1/checking/checks", opts)
+	if err != nil {
+		return nil, nil, fmt.Errorf("Error preparing check request: %w", err)
+	}
+
+	var check Check
+	links := make(Links)
+	var reqError RequestError
+	resp := Response{Data: &check, Links: links, Error: &reqError}
+	err = s.client.do(req, &resp)
+	if err != nil {
+		return nil, nil, fmt.Errorf("Error processing check request: %w", err)
+	}
+
+	if reqError != (RequestError{}) {
+		return nil, nil, &reqError
+	}
+
+	return &check, links, nil
 }

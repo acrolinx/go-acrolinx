@@ -67,3 +67,25 @@ func TestGetCapabilitiesWithError(t *testing.T) {
 
 	assert.EqualError(t, err, "Please provide a valid signature in the X-Acrolinx-Client header.")
 }
+
+func TestSubmitCheck(t *testing.T) {
+	mux, server, client := setup(t)
+	defer teardown(server)
+
+	mux.HandleFunc("/api/v1/checking/checks", func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, http.MethodPost, r.Method)
+		mustWriteHTTPResponse(t, w, "submit_check.json")
+	})
+
+	check, links, err := client.Checking.SubmitCheck(&SubmitCheckOptions{})
+	assert.NoError(t, err)
+
+	expectedCheck := &Check{"052929ee-be0c-46a7-87ce-eebd308fef6e"}
+	expectedLinks := map[string]string{
+		"cancel": "https://example.com/api/v1/checking/checks/052929ee-be0c-46a7-87ce-eebd308fef6e",
+		"result": "https://example.com/api/v1/checking/checks/052929ee-be0c-46a7-87ce-eebd308fef6e",
+	}
+
+	assert.Equal(t, expectedCheck, check)
+	assert.Equal(t, expectedLinks, links)
+}
