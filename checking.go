@@ -110,10 +110,9 @@ type CustomField struct {
 	Value string `json:"value"`
 }
 
-type SubmitCheckResponse struct {
+type Check struct {
 	ID string `json:"id"`
 }
 
-func (s *CheckingService) SubmitCheck(opts *SubmitCheckOptions) (*SubmitCheckResponse, Links, error) {
-	return nil, nil, nil
+func (s *CheckingService) SubmitCheck(opts *SubmitCheckOptions) (*Check, Links, error) {
 }
