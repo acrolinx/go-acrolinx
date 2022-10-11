@@ -141,8 +141,8 @@ func (s *CheckingService) SubmitCheck(opts *SubmitCheckOptions) (*Check, Links, 
 }
 
 type CheckResult struct {
-	Progress
 	Result
+	Progress *Progress
 }
 
 type Result struct {
@@ -270,5 +270,29 @@ type RuntimeStatistics struct {
 }
 
 func (s *CheckingService) GetCheckResult(check *Check) (*CheckResult, Links, error) {
-	return nil, nil, nil
+	path := fmt.Sprintf("api/v1/checking/checks/%s", check.ID)
+	req, err := s.client.newRequest(http.MethodGet, path, nil)
+	if err != nil {
+		return nil, nil, fmt.Errorf("Error preparing check request: %w", err)
+	}
+
+	var result CheckResult
+	var progress Progress
+	links := make(Links)
+	var reqError RequestError
+	resp := Response{Data: &result, Links: links, Progress: &progress, Error: &reqError}
+	err = s.client.do(req, &resp)
+	if err != nil {
+		return nil, nil, fmt.Errorf("Error processing check request: %w", err)
+	}
+
+	if reqError != (RequestError{}) {
+		return nil, nil, &reqError
+	}
+
+	if progress != (Progress{}) {
+		result.Progress = &progress
+	}
+
+	return &result, links, nil
 }

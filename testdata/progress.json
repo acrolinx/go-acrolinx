@@ -1,0 +1,8 @@
+{
+    "links": {},
+    "progress": {
+        "percent": 27,
+        "message": "Still processing in state ALLOCATED ...",
+        "retryAfter": 1
+    }
+}

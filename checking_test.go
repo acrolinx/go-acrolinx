@@ -89,3 +89,28 @@ func TestSubmitCheck(t *testing.T) {
 	assert.Equal(t, expectedCheck, check)
 	assert.Equal(t, expectedLinks, links)
 }
+
+func TestGetCheckProgress(t *testing.T) {
+	mux, server, client := setup(t)
+	defer teardown(server)
+
+	mux.HandleFunc("/api/v1/checking/checks/052929ee-be0c-46a7-87ce-eebd308fef6e",
+		func(w http.ResponseWriter, r *http.Request) {
+			assert.Equal(t, http.MethodGet, r.Method)
+			mustWriteHTTPResponse(t, w, "progress.json")
+		})
+
+	check := &Check{"052929ee-be0c-46a7-87ce-eebd308fef6e"}
+	result, _, err := client.Checking.GetCheckResult(check)
+	assert.NoError(t, err)
+
+	assert.NotNil(t, result.Progress)
+
+	expectedProgress := &Progress{
+		Percent:    27,
+		Message:    "Still processing in state ALLOCATED ...",
+		RetryAfter: 1,
+	}
+
+	assert.Equal(t, expectedProgress, result.Progress)
+}

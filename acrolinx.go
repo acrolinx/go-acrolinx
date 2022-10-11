@@ -122,9 +122,16 @@ func makePlatformURL(urlStr string) (*url.URL, error) {
 type Links = map[string]string
 
 type Response struct {
-	Data  interface{}   `json:"data,omitempty"`
-	Links Links         `json:"links,omitempty"`
-	Error *RequestError `json:"error,omitempty"`
+	Data     interface{}   `json:"data,omitempty"`
+	Links    Links         `json:"links,omitempty"`
+	Progress *Progress     `json:"progress,omitempty"`
+	Error    *RequestError `json:"error,omitempty"`
+}
+
+type Progress struct {
+	Percent    int    `json:"percent"`
+	Message    string `json:"message"`
+	RetryAfter int    `json:"retryAfter"`
 }
 
 type RequestError struct {
