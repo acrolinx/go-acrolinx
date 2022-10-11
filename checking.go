@@ -3,6 +3,7 @@ package acrolinx
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 type CheckingService struct {
@@ -145,11 +146,15 @@ type CheckResult struct {
 }
 
 type Result struct {
-	ID      string   `json:"id"`
-	Quality *Quality `json:"quality"`
-	Counts  *Counts  `json:"counts"`
-	Goals   []*Goal  `json:"goals"`
-	Issues  []*Issue `json:"issue"`
+	ID                string             `json:"id"`
+	Quality           *Quality           `json:"quality"`
+	Counts            *Counts            `json:"counts"`
+	Goals             []*Goal            `json:"goals"`
+	Issues            []*Issue           `json:"issue"`
+	Keywords          *Keywords          `json:"keywords"`
+	Embed             []*EmbedItem       `json:"embed"`
+	Reports           map[string]*Report `json:"reports"`
+	RuntimeStatistics *RuntimeStatistics `json:"runtimeStatistics"`
 }
 
 type Quality struct {
@@ -182,9 +187,9 @@ type Issue struct {
 	Scoring               string                 `json:"scoring"`
 	PositionalInformation *PositionalInformation `json:"positionalInformation"`
 	ReadOnly              bool                   `json:"readOnly"`
-	IssueLocations        []*IssueLocation       `json:"issueLocations"`
+	IssueLocations        []*Location            `json:"issueLocations"`
 	Suggestions           []*Suggestion          `json:"suggestions"`
-	SubIssues             []*SubIssue            `json:"subIssues"`
+	SubIssues             []*Issue               `json:"subIssues"`
 	Debug                 *Debug                 `json:"debug"`
 	CanAddToDictionary    bool                   `json:"canAddToDictionary"`
 	Links                 Links                  `json:"links"`
@@ -210,13 +215,59 @@ type Match struct {
 	OriginalEnd    int    `json:"originalEnd"`
 }
 
-type IssueLocation struct{}
+type Location struct {
+	LocationID  string            `json:"locationId"`
+	DisplayName string            `json:"displayName"`
+	Values      map[string]string `json:"values"`
+}
 
-type Suggestion struct{}
+type Suggestion struct {
+	Surface      string   `json:"surface"`
+	GroupID      string   `json:"groupId"`
+	Replacements []string `json:"replacements"`
+	IconID       string   `json:"string"`
+}
 
-type SubIssue struct{}
+type Debug struct {
+	Penalty float64 `json:"penalty"`
+}
 
-type Debug struct{}
+type Keywords struct {
+	Discovered []*Keyword `json:"discovered"`
+	Proposed   []*Keyword `json:"proposed"`
+	Target     []*Keyword `json:"target"`
+	Links      Links      `json:"links"`
+}
+
+type Keyword struct {
+	Keyword    string                   `json:"keyword"`
+	SortKey    string                   `json:"sortKey"`
+	Density    float64                  `json:"density"`
+	Count      int                      `json:"count"`
+	Prominence float64                  `json:"prominence"`
+	Occurences []*PositionalInformation `json:"positionalInformation"`
+	Warnings   []*KeywordWarning        `json:"warnings"`
+}
+
+type KeywordWarning struct {
+	Type     string `json:"type"`
+	Severity int    `json:"severity"`
+}
+
+type EmbedItem struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+type Report struct {
+	DisplayName       string   `json:"displayName"`
+	Link              *url.URL `json:"link"`
+	LinkAuthenticated *url.URL `json:"linkAuthenticated"`
+}
+
+type RuntimeStatistics struct {
+	StartedAt string `json:"startedAt"`
+}
 
 func (s *CheckingService) GetCheckResult(check *Check) (*CheckResult, Links, error) {
 	return nil, nil, nil
