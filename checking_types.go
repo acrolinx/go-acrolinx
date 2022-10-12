@@ -47,6 +47,7 @@ type CheckResult struct {
 	Reports           map[string]*Report  `json:"reports"`
 	RuntimeStatistics *RuntimeStatistics  `json:"runtimeStatistics"`
 	Document          *ResponseDocument    `json:"document"`
+	DictionaryScopes  []string             `json:"dictionaryScopes"`
 	Progress          *Progress
 }
 

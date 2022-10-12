@@ -310,6 +310,7 @@ func TestGetCheckResult(t *testing.T) {
 		RuntimeStatistics: &RuntimeStatistics{
 			StartedAt: "2022-10-10T11:55:19.603Z",
 		},
+		DictionaryScopes: []string{},
 	}
 	assert.Equal(t, expectedResult, result)
 }
