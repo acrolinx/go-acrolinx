@@ -206,16 +206,7 @@ func TestGetCheckResult(t *testing.T) {
 						Environment: "aWN0BgvQacEHtAth/7D1eKlsk+E4+dBrdF1iRCwdQc4=",
 						Index:       "1JTFUxBGybxfE4//VcukAkV0GXLWNyp8Tn83tnaNltk==1",
 					},
-					Matches: []*Match{
-						{
-							ExtractedPart:  "In",
-							ExtractedBegin: 0,
-							ExtractedEnd:   2,
-							OriginalPart:   "In",
-							OriginalBegin:  0,
-							OriginalEnd:    2,
-						},
-					},
+					Matches: []*Match{{"In", 0, 2, "In", 0, 2}},
 				},
 				ReadOnly:       false,
 				IssueLocations: []*Location{},
@@ -239,16 +230,7 @@ func TestGetCheckResult(t *testing.T) {
 								Environment: "aWN0BgvQacEHtAth/7D1eKlsk+E4+dBrdF1iRCwdQc4=",
 								Index:       "ASZBzR4DQ7r2Na9Scnkj5FtEliGk4Js0b6wRvfxCPCc==1",
 							},
-							Matches: []*Match{
-								{
-									ExtractedPart:  "can",
-									ExtractedBegin: 18,
-									ExtractedEnd:   21,
-									OriginalPart:   "can",
-									OriginalBegin:  18,
-									OriginalEnd:    21,
-								},
-							},
+							Matches: []*Match{{"can", 18, 21, "can", 18, 21}},
 						},
 						ReadOnly:           false,
 						IssueLocations:     []*Location{},
@@ -280,17 +262,8 @@ func TestGetCheckResult(t *testing.T) {
 					Prominence: 56.84981684981684,
 					Occurrences: []*PositionalInformation{
 						{
-							Hashes: nil,
-							Matches: []*Match{
-								{
-									ExtractedPart:  "error",
-									ExtractedBegin: 86,
-									ExtractedEnd:   91,
-									OriginalPart:   "error",
-									OriginalBegin:  86,
-									OriginalEnd:    91,
-								},
-							},
+							Hashes:  nil,
+							Matches: []*Match{{"error", 86, 91, "error", 86, 91}},
 						},
 					},
 					Warnings: []*KeywordWarning{},
