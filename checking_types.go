@@ -36,17 +36,17 @@ type CheckOptions struct {
 }
 
 type CheckResult struct {
-	ID                string              `json:"id"`
-	CheckOptions      AppliedCheckOptions `json:"checkOptions"`
-	Quality           *Quality            `json:"quality"`
-	Counts            *Counts             `json:"counts"`
-	Goals             []*Goal             `json:"goals"`
-	Issues            []*Issue            `json:"issues"`
-	Keywords          *Keywords           `json:"keywords"`
-	Embed             []*EmbedItem        `json:"embed"`
-	Reports           map[string]*Report  `json:"reports"`
-	RuntimeStatistics *RuntimeStatistics  `json:"runtimeStatistics"`
+	ID                string               `json:"id"`
+	CheckOptions      *AppliedCheckOptions `json:"checkOptions"`
 	Document          *ResponseDocument    `json:"document"`
+	Quality           *Quality             `json:"quality"`
+	Counts            *Counts              `json:"counts"`
+	Goals             []*Goal              `json:"goals"`
+	Issues            []*Issue             `json:"issues"`
+	Keywords          *Keywords            `json:"keywords"`
+	Embed             []*EmbedItem         `json:"embed"`
+	Reports           map[string]*Report   `json:"reports"`
+	RuntimeStatistics *RuntimeStatistics   `json:"runtimeStatistics"`
 	DictionaryScopes  []string             `json:"dictionaryScopes"`
 	Progress          *Progress
 }

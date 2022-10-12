@@ -143,7 +143,7 @@ func TestGetCheckResult(t *testing.T) {
 
 	expectedResult := &CheckResult{
 		ID: "052929ee-be0c-46a7-87ce-eebd308fef6e",
-		CheckOptions: AppliedCheckOptions{
+		CheckOptions: &AppliedCheckOptions{
 			GuidanceProfileID:   "890b68c3-3fb2-369d-b86d-37151d236d9b",
 			GuidanceProfileName: "Content and Creative (Prudential)",
 			LanguageID:          "en",
