@@ -287,3 +287,22 @@ func TestGetCheckResult(t *testing.T) {
 	}
 	assert.Equal(t, expectedResult, result)
 }
+
+func TestCancelCheck(t *testing.T) {
+	mux, server, client := setup(t)
+	defer teardown(server)
+
+	mux.HandleFunc("/api/v1/checking/checks/052929ee-be0c-46a7-87ce-eebd308fef6e",
+		func(w http.ResponseWriter, r *http.Request) {
+			assert.Equal(t, http.MethodDelete, r.Method)
+			mustWriteHTTPResponse(t, w, "cancel_check.json")
+		})
+
+	check := &Check{"052929ee-be0c-46a7-87ce-eebd308fef6e"}
+	result, _, err := client.Checking.CancelCheck(check)
+	assert.NoError(t, err)
+
+	expectedResult := &CancelledCheck{"d2d7e762-0646-43ee-8cec-2d98b6cd821b"}
+
+	assert.Equal(t, expectedResult, result)
+}

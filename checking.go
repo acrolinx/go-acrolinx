@@ -88,3 +88,30 @@ func (s *CheckingService) GetCheckResult(check *Check) (*CheckResult, Links, err
 
 	return &result, links, nil
 }
+
+func (s *CheckingService) CancelCheck(check *Check) (*CancelledCheck, Links, error) {
+	path := fmt.Sprintf("api/v1/checking/checks/%s", check.ID)
+	req, err := s.client.newRequest(http.MethodDelete, path, nil)
+	if err != nil {
+		return nil, nil, fmt.Errorf("Error preparing cancel request: %w", err)
+	}
+
+	var result CancelledCheck
+	links := make(Links)
+	var reqError RequestError
+	resp := Response{
+		Data:  &result,
+		Links: links,
+		Error: &reqError,
+	}
+	err = s.client.do(req, &resp)
+	if err != nil {
+		return nil, nil, fmt.Errorf("Error cancelling check request %s: %w", check.ID, err)
+	}
+
+	if reqError != (RequestError{}) {
+		return nil, nil, &reqError
+	}
+
+	return &result, nil, nil
+}

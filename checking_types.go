@@ -12,6 +12,10 @@ type AppliedCheckOptions struct {
 	Confidential        bool                 `json:"confidential"`
 }
 
+type CancelledCheck struct {
+	ID string `json:"id"`
+}
+
 type Capabilities struct {
 	DefaultGuidanceProfileID string             `json:"defaultGuidanceProfileId"`
 	GuidanceProfiles         []*GuidanceProfile `json:"guidanceProfiles"`
