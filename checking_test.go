@@ -159,6 +159,12 @@ func TestGetCheckResult(t *testing.T) {
 			PartialCheckRanges: []*PartialCheckRange{},
 			Confidential:       false,
 		},
+		Document: &ResponseDocument{
+			ID:                   "f8a6dad1-f3e0-4cc7-a5db-337e27abbb97",
+			DisplayInfo:          &DisplayInfo{"6f5664bd3a2234f8a7768ff00d866989"},
+			CustomFields:         []*CustomField{},
+			CustomFieldsComplete: false,
+		},
 		Quality: &Quality{
 			Score:  74,
 			Status: "yellow",

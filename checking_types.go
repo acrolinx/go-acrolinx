@@ -46,6 +46,7 @@ type CheckResult struct {
 	Embed             []*EmbedItem        `json:"embed"`
 	Reports           map[string]*Report  `json:"reports"`
 	RuntimeStatistics *RuntimeStatistics  `json:"runtimeStatistics"`
+	Document          *ResponseDocument    `json:"document"`
 	Progress          *Progress
 }
 
@@ -68,6 +69,10 @@ type CustomField struct {
 
 type Debug struct {
 	Penalty float64 `json:"penalty"`
+}
+
+type DisplayInfo struct {
+	Reference string `json:"reference"`
 }
 
 type Document struct {
@@ -190,6 +195,11 @@ type Report struct {
 	LinkAuthenticated string `json:"linkAuthenticated"`
 }
 
+type ResponseDocument struct {
+	ID                   string         `json:"id"`
+	DisplayInfo          *DisplayInfo   `json:"displayInfo"`
+	CustomFields         []*CustomField `json:"customFields"`
+	CustomFieldsComplete bool           `json:"customFieldsComplete"`
 }
 
 type RuntimeStatistics struct {
