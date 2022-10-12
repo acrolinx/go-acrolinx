@@ -75,7 +75,7 @@ func (s *CheckingService) GetCheckResult(check *Check) (*CheckResult, Links, err
 	resp := Response{Data: &result, Links: links, Progress: &progress, Error: &reqError}
 	err = s.client.do(req, &resp)
 	if err != nil {
-		return nil, nil, fmt.Errorf("Error processing check request: %w", err)
+		return nil, nil, fmt.Errorf("Error processing check request%s: %w", check.ID, err)
 	}
 
 	if reqError != (RequestError{}) {
