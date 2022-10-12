@@ -1,5 +1,17 @@
 package acrolinx
 
+type AppliedCheckOptions struct {
+	GuidanceProfileID   string               `json:"guidanceProfileId"`
+	GuidanceProfileName string               `json:"guidanceProfileName"`
+	LanguageID          string               `json:"languageId"`
+	ReportTypes         []string             `json:"reportTypes"`
+	ContentFormat       string               `json:"contentFormat"`
+	CheckType           string               `json:"checkType"`
+	TermSets            []*TermSet           `json:"termSets"`
+	PartialCheckRanges  []*PartialCheckRange `json:"partialCheckRanges"`
+	Confidential        bool                 `json:"confidential"`
+}
+
 type Capabilities struct {
 	DefaultGuidanceProfileID string             `json:"defaultGuidanceProfileId"`
 	GuidanceProfiles         []*GuidanceProfile `json:"guidanceProfiles"`
@@ -24,8 +36,17 @@ type CheckOptions struct {
 }
 
 type CheckResult struct {
-	Result
-	Progress *Progress
+	ID                string              `json:"id"`
+	CheckOptions      AppliedCheckOptions `json:"checkOptions"`
+	Quality           *Quality            `json:"quality"`
+	Counts            *Counts             `json:"counts"`
+	Goals             []*Goal             `json:"goals"`
+	Issues            []*Issue            `json:"issues"`
+	Keywords          *Keywords           `json:"keywords"`
+	Embed             []*EmbedItem        `json:"embed"`
+	Reports           map[string]*Report  `json:"reports"`
+	RuntimeStatistics *RuntimeStatistics  `json:"runtimeStatistics"`
+	Progress          *Progress
 }
 
 type ContentFormat struct {
@@ -169,16 +190,6 @@ type Report struct {
 	LinkAuthenticated string `json:"linkAuthenticated"`
 }
 
-type Result struct {
-	ID                string             `json:"id"`
-	Quality           *Quality           `json:"quality"`
-	Counts            *Counts            `json:"counts"`
-	Goals             []*Goal            `json:"goals"`
-	Issues            []*Issue           `json:"issues"`
-	Keywords          *Keywords          `json:"keywords"`
-	Embed             []*EmbedItem       `json:"embed"`
-	Reports           map[string]*Report `json:"reports"`
-	RuntimeStatistics *RuntimeStatistics `json:"runtimeStatistics"`
 }
 
 type RuntimeStatistics struct {
