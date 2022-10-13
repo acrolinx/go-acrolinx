@@ -3,7 +3,6 @@ package acrolinx
 import (
 	"fmt"
 	"net/http"
-	"net/url"
 )
 
 type CheckingService struct {
@@ -38,6 +37,7 @@ type Goal struct {
 	DisplayName string `json:"displayName"`
 	Color       string `json:"color"`
 	Scoring     string `json:"scoring"`
+	Issues      int    `json:"issues,omitempty"`
 }
 
 type TermSet struct {
@@ -150,7 +150,7 @@ type Result struct {
 	Quality           *Quality           `json:"quality"`
 	Counts            *Counts            `json:"counts"`
 	Goals             []*Goal            `json:"goals"`
-	Issues            []*Issue           `json:"issue"`
+	Issues            []*Issue           `json:"issues"`
 	Keywords          *Keywords          `json:"keywords"`
 	Embed             []*EmbedItem       `json:"embed"`
 	Reports           map[string]*Report `json:"reports"`
@@ -240,13 +240,13 @@ type Keywords struct {
 }
 
 type Keyword struct {
-	Keyword    string                   `json:"keyword"`
-	SortKey    string                   `json:"sortKey"`
-	Density    float64                  `json:"density"`
-	Count      int                      `json:"count"`
-	Prominence float64                  `json:"prominence"`
-	Occurences []*PositionalInformation `json:"positionalInformation"`
-	Warnings   []*KeywordWarning        `json:"warnings"`
+	Keyword     string                   `json:"keyword"`
+	SortKey     string                   `json:"sortKey"`
+	Density     float64                  `json:"density"`
+	Count       int                      `json:"count"`
+	Prominence  float64                  `json:"prominence"`
+	Occurrences []*PositionalInformation `json:"occurrences"`
+	Warnings    []*KeywordWarning        `json:"warnings"`
 }
 
 type KeywordWarning struct {
@@ -260,9 +260,9 @@ type EmbedItem struct {
 }
 
 type Report struct {
-	DisplayName       string   `json:"displayName"`
-	Link              *url.URL `json:"link"`
-	LinkAuthenticated *url.URL `json:"linkAuthenticated"`
+	DisplayName       string `json:"displayName"`
+	Link              string `json:"link"`
+	LinkAuthenticated string `json:"linkAuthenticated"`
 }
 
 type RuntimeStatistics struct {

@@ -1,0 +1,221 @@
+{
+    "links": {},
+    "data": {
+        "id": "052929ee-be0c-46a7-87ce-eebd308fef6e",
+        "checkOptions": {
+            "guidanceProfileId": "890b68c3-3fb2-369d-b86d-37151d236d9b",
+            "guidanceProfileName": "Content and Creative (Prudential)",
+            "languageId": "en",
+            "reportTypes": [
+                "scorecard"
+            ],
+            "contentFormat": "TEXT",
+            "checkType": "interactive",
+            "termSets": [
+                {
+                    "displayName": "ILI and Annuities"
+                },
+                {
+                    "displayName": "Retirement PRT and MRT"
+                },
+                {
+                    "displayName": "Content and Creative"
+                },
+                {
+                    "displayName": "Group Insurance"
+                }
+            ],
+            "partialCheckRanges": [],
+            "confidential": false
+        },
+        "document": {
+            "id": "f8a6dad1-f3e0-4cc7-a5db-337e27abbb97",
+            "displayInfo": {
+                "reference": "6f5664bd3a2234f8a7768ff00d866989"
+            },
+            "customFields": []
+        },
+        "quality": {
+            "score": 74,
+            "status": "yellow",
+            "scoresByStrategy": [
+                {
+                    "id": "average",
+                    "score": 74
+                },
+                {
+                    "id": "minimum",
+                    "score": 29
+                }
+            ],
+            "scoresByGoal": [
+                {
+                    "id": "CONSISTENCY",
+                    "score": 100
+                },
+                {
+                    "id": "SCANNABILITY",
+                    "score": 100
+                }
+            ],
+            "metrics": [
+                {
+                    "id": "Liveliness index",
+                    "score": 85
+                },
+                {
+                    "id": "Flesch Reading Ease",
+                    "score": 71
+                }
+            ]
+        },
+        "counts": {
+            "sentences": 7,
+            "words": 93,
+            "issues": 6,
+            "scoredIssues": 6
+        },
+        "goals": [
+            {
+                "id": "CLARITY",
+                "displayName": "Clarity",
+                "color": "#ec407a",
+                "scoring": "required",
+                "issues": 3
+            },
+            {
+                "id": "INCLUSIVE",
+                "displayName": "Inclusive Language",
+                "color": "#283593",
+                "scoring": "required",
+                "issues": 0
+            }
+        ],
+        "issues": [
+            {
+                "goalId": "CLARITY",
+                "internalName": "use_comma_after_introductory_phrase",
+                "displayNameHtml": "<div lang=\"en\">Could you add a comma after the introductory phrase?</div>",
+                "guidanceHtml": "<div lang=\"en\">If you use a comma after a prepositional or introductory phrase, your content will be easier to read.</div>",
+                "displaySurface": "In most cases",
+                "issueType": "actionable",
+                "scoring": "required",
+                "positionalInformation": {
+                    "hashes": {
+                        "issue": "bpraLcyUF2mDHm2dMLp9jl9vBjyZyYu15ZBpbUFKPIk=",
+                        "environment": "aWN0BgvQacEHtAth/7D1eKlsk+E4+dBrdF1iRCwdQc4=",
+                        "index": "1JTFUxBGybxfE4//VcukAkV0GXLWNyp8Tn83tnaNltk==1"
+                    },
+                    "matches": [
+                        {
+                            "extractedPart": "In",
+                            "extractedBegin": 0,
+                            "extractedEnd": 2,
+                            "originalPart": "In",
+                            "originalBegin": 0,
+                            "originalEnd": 2
+                        }
+                    ]
+                },
+                "readOnly": false,
+                "issueLocations": [],
+                "suggestions": [
+                    {
+                        "surface": "isn’t",
+                        "groupId": "isn’t",
+                        "replacements": [
+                            "isn’t",
+                            "",
+                            ""
+                        ],
+                        "iconId": null
+                    }
+                ],
+                "subIssues": [{
+                        "goalId": "TONE",
+                        "internalName": "phenomenon_RepetitiveStructureModalVerbCan_RepetitiveStructure",
+                        "displayNameHtml": "<div lang=\"en\"><q>can just check</q>\n</div>",
+                        "guidanceHtml": "",
+                        "displaySurface": null,
+                        "issueType": "actionable",
+                        "positionalInformation": {
+                            "hashes": {
+                                "issue": "KFME5q6POcqou27VfPUfIFa36QaCLwaO67yAYqcAYxI=",
+                                "environment": "aWN0BgvQacEHtAth/7D1eKlsk+E4+dBrdF1iRCwdQc4=",
+                                "index": "ASZBzR4DQ7r2Na9Scnkj5FtEliGk4Js0b6wRvfxCPCc==1"
+                            },
+                            "matches": [
+                                {
+                                    "extractedPart": "can",
+                                    "extractedBegin": 18,
+                                    "extractedEnd": 21,
+                                    "originalPart": "can",
+                                    "originalBegin": 18,
+                                    "originalEnd": 21
+                                }
+                            ]
+                        },
+                        "readOnly": false,
+                        "issueLocations": [],
+                        "suggestions": [],
+                        "subIssues": [],
+                        "debug": {
+                            "penalty": 1000
+                        },
+                        "canAddToDictionary": false,
+                        "links": {}
+                    }],
+                "debug": {},
+                "canAddToDictionary": false,
+                "links": {
+                    "help": "https://example.com/htmldata/en/rules/9b218748275029619c1f9cdfd66961e47a69e7c8.html"
+                }
+            }
+        ],
+        "keywords": {
+            "links": {
+                "getTargetKeywords": "https://example.com/iq/services/v1/rest/findability/targetKeywords?contextId=4b3b2a7326d29c9bf58a3d51cc0a59dc",
+                "putTargetKeywords": "https://example.com/iq/services/v1/rest/findability/targetKeywords?contextId=4b3b2a7326d29c9bf58a3d51cc0a59dc"
+            },
+            "discovered": [
+                {
+                    "keyword": "error strings",
+                    "sortKey": "2",
+                    "density": 24.180959883021306,
+                    "count": 2,
+                    "prominence": 56.84981684981684,
+                    "occurrences": [
+                        {
+                            "hashes": null,
+                            "matches": [
+                                {
+                                    "extractedPart": "error",
+                                    "extractedBegin": 86,
+                                    "extractedEnd": 91,
+                                    "originalPart": "error",
+                                    "originalBegin": 86,
+                                    "originalEnd": 91
+                                }
+                            ]
+                        }
+                    ],
+                    "warnings": []
+                }
+            ],
+            "target": [],
+            "proposed": []
+        },
+        "embed": [],
+        "reports": {
+            "scorecard": {
+                "displayName": "Score Card",
+                "link": "https://example.com/api/v1/checking/scorecards/052929ee-be0c-46a7-87ce-eebd308fef6e",
+                "linkAuthenticated": "https://example.com/api/v1/checking/scorecards/052929ee-be0c-46a7-87ce-eebd308fef6e"
+            }
+        },
+        "runtimeStatistics": {
+            "startedAt": "2022-10-10T11:55:19.603Z"
+        },
+        "dictionaryScopes": []
+    }
+}
