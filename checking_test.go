@@ -65,6 +65,17 @@ func TestGetCapabilities(t *testing.T) {
 	assert.Equal(t, expectedLinks, links)
 }
 
+func TestClientCapabilitiesWithOptions(t *testing.T) {
+	mux, server, client := setup(t)
+	defer teardown(server)
+
+	mux.HandleFunc("/api/v1/checking/capabilities", func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, "qya-Teng", r.Header.Get("X-Acrolinx-Client-Locale"))
+	})
+
+	client.Checking.GetCapabilities(&GetCapabilitiesOptions{"qya-Teng"})
+}
+
 func TestGetCapabilitiesWithError(t *testing.T) {
 	mux, server, client := setup(t)
 	defer teardown(server)
