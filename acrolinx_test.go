@@ -6,7 +6,24 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
+
+func TestSignIn(t *testing.T) {
+	mux, server, client := setup(t)
+	defer teardown(server)
+
+	mux.HandleFunc("/dashboard/api/signin/authenticate", func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, http.MethodPost, r.Method)
+		mustWriteHTTPResponse(t, w, "sign_in.json")
+	})
+
+	err := client.SignIn("username", "password")
+	assert.NoError(t, err)
+
+	assert.Equal(t, "VGhlIGZhbGNvbiBoZWFycyB0aGUgZmFsY29uZXIK", client.accessToken)
+}
 
 func setup(t *testing.T) (*http.ServeMux, *httptest.Server, *Client) {
 	mux := http.NewServeMux()
