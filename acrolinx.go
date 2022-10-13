@@ -121,7 +121,7 @@ func makePlatformURL(urlStr string) (*url.URL, error) {
 		urlStr += "/"
 	}
 
-	platformURL, err := url.Parse(urlStr)
+	platformURL, err := url.ParseRequestURI(urlStr)
 	if err != nil {
 		return nil, fmt.Errorf("Error parsing platform URL: %w", err)
 	}

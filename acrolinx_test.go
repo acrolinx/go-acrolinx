@@ -10,6 +10,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestNewClientWithErr(t *testing.T) {
+	_, err := NewClient("signature", "not a URL")
+	assert.Error(t, err)
+	assert.ErrorContains(t, err, "Error parsing platform URL")
+}
+
 func TestSignIn(t *testing.T) {
 	mux, server, client := setup(t)
 	defer teardown(server)
