@@ -31,7 +31,7 @@ type Client struct {
 	Checking *CheckingService
 }
 
-func NewClient(signature string, urlStr string) (*Client, error) {
+func NewClient(signature string, urlStr string, options ...ClientOptionFunc) (*Client, error) {
 	platformURL, err := makePlatformURL(urlStr)
 	if err != nil {
 		return nil, fmt.Errorf("Error creating new client: %w", err)
@@ -45,6 +45,16 @@ func NewClient(signature string, urlStr string) (*Client, error) {
 		client: &http.Client{
 			Timeout: 30 * time.Second,
 		},
+	}
+
+	for _, fn := range options {
+		if fn == nil {
+			continue
+		}
+
+		if err := fn(client); err != nil {
+			return nil, err
+		}
 	}
 
 	client.Checking = &CheckingService{client}
@@ -117,6 +127,10 @@ func makePlatformURL(urlStr string) (*url.URL, error) {
 	}
 
 	return platformURL, nil
+}
+
+func (c *Client) setToken(token string) {
+	c.accessToken = token
 }
 
 type Links = map[string]string
