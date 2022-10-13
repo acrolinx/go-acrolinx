@@ -72,7 +72,7 @@ func (c *Client) SignIn(username string, password string) error {
 	}
 
 	var token accessToken
-	err = c.do(req, token)
+	err = c.do(req, &token)
 	if err != nil {
 		return fmt.Errorf("Error signing in, could not prepare request: %w", err)
 	}
