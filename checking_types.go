@@ -33,9 +33,9 @@ type Check struct {
 type CheckOptions struct {
 	GuidanceProfileID  string               `json:"guidanceProfileId"`
 	ContentFormat      string               `json:"contentFormat"`
-	ReportTypes        []string             `json:"reportTypes"`
+	ReportTypes        []string             `json:"reportTypes,omitempty"`
 	CheckType          string               `json:"checkType"`
-	PartialCheckRanges []*PartialCheckRange `json:"partialCheckRanges"`
+	PartialCheckRanges []*PartialCheckRange `json:"partialCheckRanges,omitempty"`
 	BatchID            string               `json:"batchId"`
 }
 
