@@ -52,7 +52,7 @@ type CheckResult struct {
 	Reports           map[string]*Report   `json:"reports"`
 	RuntimeStatistics *RuntimeStatistics   `json:"runtimeStatistics"`
 	DictionaryScopes  []string             `json:"dictionaryScopes"`
-	Progress          *Progress
+	Progress          *Progress            `json:"progress"`
 }
 
 type ContentFormat struct {
