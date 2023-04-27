@@ -46,7 +46,8 @@ Acrolinx UI by passing an option function when creating the client:
 
 ```go
 client, err := acrolinx.NewClient("some-signature",
-""https://acrolinx.example.com", acrolinx.WithAPIToken("some-api-token"))
+    "https://acrolinx.example.com",
+    acrolinx.WithAPIToken("some-api-token")) 
 if err != nil {
     log.Fatalf("Error creating Acrolinx client: %v", err)
 }
